@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貓咪白天夜晚時鐘</title>
+    <style>
+        body {
+            background: url(./cat-day.jpg);
+            /* background-image: url(./cat-night.jpg); */
+            background-repeat: no-repeat;
+            background-size: 100vw 100vh;
+            margin: 0;
+            height: 100vh
+        }
+
+        #clock {
+            background-color: transparent;
+            width: 450px;
+            height: 450px;
+            background-image: url(./fish.png);
+            background-size: 430px 330px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            top: 3%;
+            left: 60%;
+            border-radius: 50%;
+            position: relative;
+
+        }
+
+        #hour {
+            width: 10%;
+            height: 4px;
+            background-color: gray;
+            position: absolute;
+            top: calc(50% - 5px);
+            left: 40%;
+            border-radius: 5px;
+            transform-origin: right center;
+        }
+
+        #minute {
+            width: 20%;
+            height: 4px;
+            background-color: gray;
+            position: absolute;
+            top: calc(50% - 5px);
+            left: 30%;
+            border-radius: 5px;
+            transform-origin: right center;
+        }
+
+        #second {
+            width: 25%;
+            height: 3px;
+            background-color: lightskyblue;
+            position: absolute;
+            top: calc(50% - 5px);
+            left: 25%;
+            border-radius: 5px;
+            transform-origin: right center;
+        }
+
+        img {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: -30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clock">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second">
+            <img src="./goldfish.png">
+        </div>
+    </div>
+    <script>
+        const hour = document.getElementById('hour')
+        const minute = document.getElementById('minute')
+        const second = document.getElementById('second')
+        const body = document.getElementsByTagName('body')[0]
+
+        const clock = () => {
+            const date = new Date()
+            hour.style.transform = `rotate(${date.getHours() * 30 + 90}deg)`
+            minute.style.transform = `rotate(${date.getMinutes() * 6 + 90}deg)`
+            second.style.transform = `rotate(${date.getSeconds() * 6 + 90}deg)`
+            console.log(`${date.getHours()}`)
+            if (`${date.getHours()}` >= 18 || `${date.getHours()}` < 6) {
+                body.style.backgroundImage = 'url(./cat-night.jpg)'
+                body.style.backgroundRepeat = 'no-repeat'
+            } else {
+                body.style.backgroundImage = 'url(./cat-day.jpg)'
+                body.style.backgroundRepeat = 'no-repeat'
+            }
+        }
+        clock()
+        setInterval(clock, 1000)
+
+
+    </script>
+</body>
+
+</html>
